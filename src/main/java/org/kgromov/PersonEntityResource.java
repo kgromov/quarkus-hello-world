@@ -13,16 +13,15 @@ import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 
 @ApplicationScoped
-@Path("/persons/active-record")
-public class PersonResource {
+@Path("/persons/entity")
+public class PersonEntityResource {
+    @Inject PersonEntityRepository personEntityRepository;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
 //    @Transactional
-    public List<Person> getPersons(){
-        // does not work - holly crap! - overrides of base entity is required :)
-//        return Person.listAll(Sort.by("firstName", "lastName"));
-        return Person.findAllPersons();
+    public List<PersonEntity> getPersons(){
+        return personEntityRepository.listAll(Sort.by("firstName"));
     }
 
     @Path("/test-create")
@@ -32,11 +31,11 @@ public class PersonResource {
     public String createRandomPerson() {
         var faker = new Faker();
         var name = faker.name();
-        var person = new Person();
-        person.firstName = name.firstName();
-        person.lastName = name.lastName();
-        person.persistAndFlush();
-        long count = Person.count();
+        var person = new PersonEntity();
+        person.setFirstName(name.firstName());
+        person.setLastName(name.lastName());
+        personEntityRepository.persistAndFlush(person);
+        long count = personEntityRepository.count();
         return count > 2 ? "OK" : "Sucks";
     }
 }
