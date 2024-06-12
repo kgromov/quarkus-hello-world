@@ -46,6 +46,10 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-jdbc-h2</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jdbc-mysql</artifactId>
+        </dependency>
         <!-- all this shit + servlet mapping (src/main/resources/META-INF/web.xml) to make h2-console works -->
       <!--  <dependency>
             <groupId>io.quarkus</groupId>
