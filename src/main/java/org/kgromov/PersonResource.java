@@ -21,8 +21,8 @@ public class PersonResource {
 //    @Transactional
     public List<Person> getPersons(){
         // does not work - holly crap! - overrides of base entity is required :)
-//        return Person.listAll(Sort.by("firstName", "lastName"));
-        return Person.findAllPersons();
+        return Person.listAll(Sort.by("firstName", "lastName"));
+//        return Person.listAll();
     }
 
     @Path("/test-create")

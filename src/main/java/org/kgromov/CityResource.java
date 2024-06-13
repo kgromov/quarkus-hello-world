@@ -1,5 +1,6 @@
 package org.kgromov;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -20,6 +21,7 @@ public class CityResource {
     @Produces(MediaType.APPLICATION_JSON)
 //    @Transactional
     public List<City> getPersons() {
+        List<CityActiveRecord> cities = CityActiveRecord.listAll();
         return cityRepository.listAll(Sort.by("name"));
     }
 }
